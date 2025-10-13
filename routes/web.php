@@ -8,16 +8,17 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-/*
+
 Route::get('/empleado', function () {
     return view('empleado.index');
 });
 
 route::get('empleado/create',[EmpleadoController::class,'create']);
-*/
 
 route::resource('empleado', EmpleadoController::class)-> middleware('auth');
-Auth::routes(['register'=>false,'reset'=>false]);
+Auth::routes();
+
+Route::resource('inventario', InventarioController::class)->middleware('auth');
 
 Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
 
