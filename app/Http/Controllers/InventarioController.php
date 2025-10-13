@@ -4,33 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventario;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class InventarioController extends Controller
 {
-    /**
-     * Muestra la lista paginada de ítems del inventario.
-     */
-    public function index()
-    {
-        $datos['inventario'] = Inventario::paginate(5);
-        return view('inventario.index', $datos);
+    public function index(Request $request) {
+        $query = Inventario::query();
+
+        if ($request->filled('disponibilidad')) {
+            $query->where('disponibilidad', $request->disponibilidad);
+        }
+
+        $inventario = $query->paginate(5);
+        return view('inventario.index', compact('inventario'));
     }
 
-    /**
-     * Muestra el formulario para crear un nuevo ítem.
-     */
-    public function create()
-    {
-        $item = new Inventario(); // objeto vacío para evitar errores en la vista
+    public function create() {
+        $item = new Inventario();
         return view('inventario.create', compact('item'));
     }
 
-    /**
-     * Guarda un nuevo ítem en la base de datos.
-     */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $campos = [
             'nombre'           => 'required|string|max:100',
             'tipo_herramienta' => 'required|string|max:100',
@@ -43,44 +37,32 @@ class InventarioController extends Controller
         ];
 
         $mensajes = [
-            'required'         => 'El campo :attribute es obligatorio.',
-            'cantidad.integer' => 'La cantidad debe ser un número entero.',
-            'cantidad.min'     => 'La cantidad debe ser al menos 1.',
-            'disponibilidad.in'=> 'La disponibilidad debe ser Disponible, En uso o Dañado.',
+            'required'            => 'El campo :attribute es obligatorio.',
+            'cantidad.integer'    => 'La cantidad debe ser un número entero.',
+            'cantidad.min'        => 'La cantidad debe ser al menos 1.',
+            'disponibilidad.in'   => 'La disponibilidad debe ser Disponible, En uso o Dañado.',
             'fecha_registro.date' => 'La fecha debe tener un formato válido.',
         ];
 
         $this->validate($request, $campos, $mensajes);
 
         $datosItem = $request->except('_token');
+        $datosItem['fecha_registro'] = date('Y-m-d H:i:s', strtotime($request->fecha_registro));
 
         Inventario::create($datosItem);
-
         return redirect('inventario')->with('mensaje', 'Ítem registrado con éxito');
     }
 
-    /**
-     * Muestra los detalles de un ítem específico (no implementado).
-     */
-    public function show(Inventario $item)
-    {
-        // Método disponible para futuras funcionalidades
+    public function show(Inventario $item) {
+        // Placeholder
     }
 
-    /**
-     * Muestra el formulario para editar un ítem existente.
-     */
-    public function edit($id)
-    {
+    public function edit($id) {
         $item = Inventario::findOrFail($id);
         return view('inventario.edit', compact('item'));
     }
 
-    /**
-     * Actualiza los datos de un ítem en la base de datos.
-     */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $campos = [
             'nombre'           => 'required|string|max:100',
             'tipo_herramienta' => 'required|string|max:100',
@@ -93,28 +75,30 @@ class InventarioController extends Controller
         ];
 
         $mensajes = [
-            'required'         => 'El campo :attribute es obligatorio.',
-            'cantidad.integer' => 'La cantidad debe ser un número entero.',
-            'cantidad.min'     => 'La cantidad debe ser al menos 1.',
-            'disponibilidad.in'=> 'La disponibilidad debe ser Disponible, En uso o Dañado.',
+            'required'            => 'El campo :attribute es obligatorio.',
+            'cantidad.integer'    => 'La cantidad debe ser un número entero.',
+            'cantidad.min'        => 'La cantidad debe ser al menos 1.',
+            'disponibilidad.in'   => 'La disponibilidad debe ser Disponible, En uso o Dañado.',
             'fecha_registro.date' => 'La fecha debe tener un formato válido.',
         ];
 
         $this->validate($request, $campos, $mensajes);
 
         $datosItem = $request->except(['_token', '_method']);
+        $datosItem['fecha_registro'] = date('Y-m-d H:i:s', strtotime($request->fecha_registro));
 
         Inventario::where('id', '=', $id)->update($datosItem);
-
-        return redirect('inventario')->with('mensaje', 'Ítem actualizado con éxito');
     }
 
-    /**
-     * Elimina un ítem del inventario.
-     */
-    public function destroy($id)
-    {
-        Inventario::destroy($id);
-        return redirect('inventario')->with('mensaje', 'Ítem eliminado');
-    }
+
+public function exportarPDF(Request $request)
+{
+    $query = Inventario::query();
+
+
+    $inventario = $query->get() ?? collect(); // ← garantiza que no sea null
+
+    return Pdf::loadView('inventario.pdf', compact('inventario'))->stream('inventario.pdf');
+}
+
 }

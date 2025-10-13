@@ -2,8 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h2>Editar herramienta</h2>
+<form action="{{ url('/inventario/')}}" method="POST" enctype="multipart/form-data">
+@csrf
+
 
     @include('inventario.inventarioform', ['modo' => 'Editar'])
+</form>
 </div>
 @endsection
+

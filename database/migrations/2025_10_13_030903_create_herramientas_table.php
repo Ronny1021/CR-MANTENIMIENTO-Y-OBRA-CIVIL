@@ -14,17 +14,14 @@ return new class extends Migration
     {
         Schema::create('inventario', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo_herramienta', 100);
             $table->string('nombre', 100);
-            $table->string('categoria', 100);
+            $table->string('tipo_herramienta', 100);
+            $table->string('categoria', 100)->nullable();
             $table->string('unidad_medida', 50);
             $table->integer('cantidad');
-            $table->string('estado', 50)->nullable();
+            $table->string('estado', 100)->nullable();
             $table->enum('disponibilidad', ['Disponible', 'En uso', 'Dañado'])->default('Disponible');
-            $table->timestamp('fecha_registro')->default(DB::raw('CURRENT_TIMESTAMP'));
-
-         $table->unsignedBigInteger('registrado_por')->nullable(); // sin relación
-
+            $table->dateTime('fecha_registro')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

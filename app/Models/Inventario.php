@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inventario extends Model
 {
-    //
+    protected $table = 'inventario';
+
     protected $fillable = [
-    'tipo_herramienta',
-    'nombre',
-    'categoria',
-    'unidad_medida',
-    'cantidad',
-    'estado',
-    'disponibilidad',
-    'fecha_registro'
-];
+        'nombre',
+        'tipo_herramienta',
+        'categoria',
+        'cantidad',
+        'unidad_medida',
+        'disponibilidad',
+        'fecha_registro',
+    ];
 }

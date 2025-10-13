@@ -8,6 +8,7 @@
 
     @include('empleado.form', ['modo' => 'Editar'])
 </form>
-
+</div>
+@endsection
 
 formulario de edicion de empleado

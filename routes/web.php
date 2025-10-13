@@ -1,28 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\http\Controllers\EmpleadoController;
+use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\InventarioController;
 
-
-Route::get('/', function () {
-    return view('auth.login');
-});
-
-
-Route::get('/empleado', function () {
-    return view('empleado.index');
-});
-
-route::get('empleado/create',[EmpleadoController::class,'create']);
-
-route::resource('empleado', EmpleadoController::class)-> middleware('auth');
+// Rutas de autenticación
 Auth::routes();
 
-Route::resource('inventario', InventarioController::class)->middleware('auth');
-
-Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
-
-Route::group(['middleware' => 'auth'],  function () {
-    Route::get('/', [EmpleadoController::class, 'index'])->name('home');
+// Ruta raíz: redirige al login si no está autenticado
+Route::get('/', function () {
+    return redirect()->route('login');
 });
 
+// Ruta principal después de iniciar sesión
+Route::get('/home', [EmpleadoController::class, 'index'])->name('home')->middleware('auth');
+
+// Grupo de rutas protegidas por autenticación
+Route::middleware(['auth'])->group(function () {
+
+    // Empleado
+    Route::get('empleado/create', [EmpleadoController::class, 'create']);
+    Route::resource('empleado', EmpleadoController::class);
+
+
+    Route::get('inventario/pdf', [App\Http\Controllers\InventarioController::class,'pdf'] )->name('inventario.pdf');
+
+    // Inventario
+    Route::resource('inventario', InventarioController::class);
+    Route::get('/inventario/pdf', [InventarioController::class, 'exportarPDF']);
+
+});
