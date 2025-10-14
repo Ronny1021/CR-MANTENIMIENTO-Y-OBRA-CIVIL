@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inventario por Disponibilidad</title>
+    <title>Inventario Disponible</title>
     <style>
         body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; }
         h2 { text-align: center; margin-bottom: 10px; }
