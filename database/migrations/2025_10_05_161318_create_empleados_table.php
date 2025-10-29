@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->String('Nombres');
             $table->String('Apellidos');
-            $table->String('Documento');
+            $table->String('Documento')->nullable();;
             $table->text('Correo');
             $table->String('Rol');
             $table->integer('edad');
