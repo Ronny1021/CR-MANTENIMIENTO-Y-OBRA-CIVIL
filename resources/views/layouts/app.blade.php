@@ -43,6 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/inventario') }}">Inventario</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('nomina.index') }}">Nomina</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

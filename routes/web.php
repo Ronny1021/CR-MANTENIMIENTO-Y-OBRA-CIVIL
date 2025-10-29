@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\NominaController;
 
 // Rutas de autenticación
 Auth::routes();
@@ -17,6 +18,9 @@ Route::get('/home', [EmpleadoController::class, 'index'])->name('home')->middlew
 
 // Grupo de rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
+
+     // Nomina
+    Route::resource('nomina', NominaController::class);
 
     // Empleado
     Route::get('empleado/create', [EmpleadoController::class, 'create']);
