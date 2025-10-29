@@ -46,6 +46,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('nomina.index') }}">Asistencia</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('certificados.form') }}">Certificados</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

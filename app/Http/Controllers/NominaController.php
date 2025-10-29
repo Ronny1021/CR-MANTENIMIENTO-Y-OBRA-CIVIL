@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Nomina;
 use App\Models\Empleado;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class NominaController extends Controller
 {
@@ -41,6 +42,11 @@ class NominaController extends Controller
 
         $entrada = Carbon::createFromFormat('H:i', $request->hora_entrada);
         $salida = Carbon::createFromFormat('H:i', $request->hora_salida);
+
+        if ($salida->lt($entrada)) {
+            $salida->addDay(); // Turno nocturno
+        }
+
         $horas = $salida->diffInMinutes($entrada) / 60;
 
         Nomina::create([
@@ -68,7 +74,7 @@ class NominaController extends Controller
         $mensajes = [
             'required' => 'El campo :attribute es obligatorio.',
             'date' => 'El campo :attribute debe tener una fecha válida.',
-            'date_format' => 'El campo :attribute entrada debe de ser inferior a la de salida.',
+            'date_format' => 'El campo :attribute debe tener el formato HH:mm.',
             'after' => 'La hora de salida debe ser posterior a la hora de entrada.',
             'exists' => 'El empleado seleccionado no es válido.',
         ];
@@ -83,6 +89,11 @@ class NominaController extends Controller
 
         $entrada = Carbon::createFromFormat('H:i', $request->hora_entrada);
         $salida = Carbon::createFromFormat('H:i', $request->hora_salida);
+
+        if ($salida->lt($entrada)) {
+            $salida->addDay(); // Turno nocturno
+        }
+
         $horas = $salida->diffInMinutes($entrada) / 60;
 
         $nomina = Nomina::findOrFail($id);
@@ -96,5 +107,32 @@ class NominaController extends Controller
         ]);
 
         return redirect()->route('nomina.index')->with('success', 'Registro actualizado correctamente');
+    }
+
+    public function certificadoForm()
+    {
+        $empleados = Empleado::orderBy('Nombres')->get();
+        return view('nomina.certificado_form', compact('empleados'));
+    }
+
+    public function generarCertificadoPDF(Request $request)
+    {
+        $request->validate([
+            'empleado_id' => 'required|exists:empleados,id',
+        ]);
+
+        $empleado = Empleado::findOrFail($request->empleado_id);
+        $totalHoras = Nomina::where('empleado_id', $empleado->id)->sum('horas_trabajadas');
+        $fechaActual = now()->translatedFormat('d \d\e F \d\e Y');
+
+        $data = [
+            'empleado' => $empleado,
+            'totalHoras' => $totalHoras,
+            'fechaActual' => $fechaActual,
+            'empresa' => 'CR MANTENIMIENTO Y OBRACIVIL',
+        ];
+
+        $pdf = Pdf::loadView('nomina.certificado_pdf', $data);
+        return $pdf->stream('certificado_laboral.pdf');
     }
 }

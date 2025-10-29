@@ -19,18 +19,18 @@ Route::get('/home', [EmpleadoController::class, 'index'])->name('home')->middlew
 // Grupo de rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
 
-     // Nomina
+    // Certificados laborales
+    Route::get('/certificados', [NominaController::class, 'certificadoForm'])->name('certificados.form');
+    Route::post('/certificados/pdf', [NominaController::class, 'generarCertificadoPDF'])->name('certificados.pdf');
+
+    // Nomina
     Route::resource('nomina', NominaController::class);
 
     // Empleado
     Route::get('empleado/create', [EmpleadoController::class, 'create']);
     Route::resource('empleado', EmpleadoController::class);
 
-
-    Route::get('inventario/pdf', [App\Http\Controllers\InventarioController::class,'pdf'] )->name('inventario.pdf');
-
     // Inventario
+    Route::get('inventario/pdf', [InventarioController::class, 'exportarPDF'])->name('inventario.pdf');
     Route::resource('inventario', InventarioController::class);
-    Route::get('/inventario/pdf', [InventarioController::class, 'exportarPDF']);
-
 });
