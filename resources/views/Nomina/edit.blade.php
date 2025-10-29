@@ -19,8 +19,16 @@
         @method('PUT')
 
         <div class="mb-3">
-            <label for="empleado" class="form-label">Empleado</label>
-            <input type="text" name="empleado" class="form-control" value="{{ $nomina->empleado }}" required>
+            <label for="empleado_id" class="form-label">Empleado</label>
+            <select name="empleado_id" class="form-control" required>
+                <option value="">-- Selecciona un empleado --</option>
+                @foreach ($empleados as $empleado)
+                    <option value="{{ $empleado->id }}"
+                        {{ $nomina->empleado_id == $empleado->id ? 'selected' : '' }}>
+                        {{ $empleado->Nombres }} {{ $empleado->Apellidos }} ({{ $empleado->Documento }})
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-3">

@@ -15,4 +15,9 @@ class Empleado extends Model
         'edad',
         'Foto'
     ];
+
+    public function nominas()
+    {
+        return $this->hasMany(Nomina::class);
+    }
 }
