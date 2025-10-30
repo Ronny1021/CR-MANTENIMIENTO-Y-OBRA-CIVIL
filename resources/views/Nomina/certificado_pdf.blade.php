@@ -17,7 +17,7 @@
         CR MANTENIMIENTO Y OBRACIVIL certifica que el(la) señor(a)
         <strong>{{ $empleado->Nombres }} {{ $empleado->Apellidos }}</strong>,
         identificado(a) con documento número <strong>{{ $empleado->Documento }}</strong>,
-        ha trabajado con nosotros desempeñando funciones asignadas en diferentes proyectos de mantenimiento y obra civil.
+        ha trabajado con nosotros desempeñando funciones asignadas en diferentes proyectos de mantenimiento y obra civil este documento es para el cerficado.
 
         Durante su tiempo de vinculación, ha acumulado un total de <strong>{{ number_format($totalHoras, 2, ',', '.') }}</strong> horas trabajadas,
         según los registros de nómina de la empresa.
