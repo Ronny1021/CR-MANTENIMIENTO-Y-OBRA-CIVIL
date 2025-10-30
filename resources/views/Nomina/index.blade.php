@@ -7,6 +7,7 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    {{-- Ventana que muestra el nuevo registro de asistencia  --}}
 
     <a href="{{ route('nomina.create') }}" class="btn btn-success mb-3">Nuevo Registro</a>
 
@@ -56,5 +57,7 @@
             @endforeach
         </tbody>
     </table>
+
+    {{-- Contenido de la ventana asistencia  --}}
 </div>
 @endsection

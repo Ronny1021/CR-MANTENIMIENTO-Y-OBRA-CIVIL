@@ -11,6 +11,8 @@
     </style>
 </head>
 <body>
+{{-- Contenido de la vista de certificado --}}
+
     <div class="titulo">CERTIFICADO LABORAL</div>
 
     <div class="contenido">
@@ -30,5 +32,6 @@
         Departamento de Talento Humano<br>
         CR MANTENIMIENTO Y OBRACIVIL
     </div>
+    
 </body>
 </html>

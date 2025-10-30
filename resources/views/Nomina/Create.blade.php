@@ -13,7 +13,7 @@
             </ul>
         </div>
     @endif
-
+{{-- Formulario de nomina--}}
     <form action="{{ route('nomina.store') }}" method="POST">
         @csrf
 
@@ -28,7 +28,7 @@
                 @endforeach
             </select>
         </div>
-
+{{-- Input para el formato de hora  --}}
         <div class="mb-3">
             <label for="lugar" class="form-label">Lugar</label>
             <input type="text" name="lugar" class="form-control" required>

@@ -13,7 +13,7 @@
             </ul>
         </div>
     @endif
-
+{{-- Formulario de nomina para guardar o editar cambios --}}
     <form action="{{ route('nomina.update', $nomina->id) }}" method="POST">
         @csrf
         @method('PUT')
