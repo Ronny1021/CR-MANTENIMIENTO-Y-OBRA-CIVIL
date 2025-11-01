@@ -1,7 +1,44 @@
-// Body
-$body-bg: #f8fafc;
+// Paleta de colores
+$primary-color: black; // color principal (botones, títulos)
+$secondary-color: #888888; // color secundario (bordes, íconos)
+$background-color: white; // fondo general
+$card-bg: white; // fondo para tarjetas o secciones
+$text-color: black; // texto principal
+$text-muted: #cccccc; // texto secundario o desactivado
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Campos de formulario
+$input-bg: white;
+$input-border: #666666;
+$input-focus: #0d6efd; // color de borde al enfocar
+
+// Tipografía
+$font-stack: 'Nunito', sans-serif;
+$heading-font: 'Segoe UI', sans-serif;
+$base-font-size: 16px;
+$heading-font-size: 24px;
+
+// Bordes y radios
+$border-radius: 10px;
+$border-radius-sm: 5px;
+$border-radius-lg: 20px;
+
+// Espaciado
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 32px;
+
+// Sombra
+$box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+$box-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+$box-shadow-lg: 0 8px 12px rgba(0, 0, 0, 0.2);
+
+// Transiciones
+$transition-fast: 0.2s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
+
+// Estados
+$success-color: #198754;
+$error-color: #dc3545;
+$warning-color: #ffc107;
+$info-color: #0dcaf0;

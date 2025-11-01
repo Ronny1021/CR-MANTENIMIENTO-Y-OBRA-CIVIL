@@ -54,7 +54,13 @@
                         @method('DELETE')
                         <input type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Quieres borrar este empleado?')" value="Borrar">
                     </form>
+
+                    <div class="login-image">
+                                <img src="{{ asset('images/imagefooter (2).png') }}" alt="Imagen decorativa">
+
+
                 </td>
+
             </tr>
         @endforeach
     </tbody>

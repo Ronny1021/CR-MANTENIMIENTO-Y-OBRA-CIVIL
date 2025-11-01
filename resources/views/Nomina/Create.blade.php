@@ -51,5 +51,7 @@
 
         <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
+         <div class="login-image">
+  <img src="{{ asset('images/imagefooter (2).png') }}" alt="Imagen decorativa">
 </div>
 @endsection

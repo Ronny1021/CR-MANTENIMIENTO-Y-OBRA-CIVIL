@@ -1,8 +1,173 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+// ----------------------
+// Fuentes externas
+// ----------------------
+@import url('https://fonts.bunny.net/css?family=Nunito'); // Fuente principal: Nunito
 
-// Variables
-@import 'variables';
+// ----------------------
+// Variables personalizadas
+// ----------------------
+@import 'variables'; // Colores, bordes, sombras, etc.
 
+// ----------------------
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+// ----------------------
+@import 'bootstrap/scss/bootstrap'; // Framework base
+
+// ----------------------
+// Estilos globales
+// ----------------------
+body {
+  font-family: $font-stack;
+  background: linear-gradient(to right, #2f2f2f, #ffffff); // Degradado animado
+  background-size: 200% 200%;
+  animation: gradientShift 20s ease infinite;
+  color: $text-color;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.auth-body {
+  @extend body; // Hereda fondo animado
+  animation-duration: 8s; // Más rápido
+}
+
+.default-body {
+  background-color: #f8f9fa;
+  font-family: $font-stack;
+  color: #212529;
+}
+
+// ----------------------
+// Encabezado transparente
+// ----------------------
+.transparent-header {
+  background-color: transparent !important;
+  box-shadow: none;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+
+  .navbar-brand,
+  .nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+  }
+
+  .nav-link:hover {
+    color: #cccccc !important;
+  }
+}
+
+// ----------------------
+// Login
+// ----------------------
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 100px 20px 0;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  padding: 30px;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-md;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: $primary-color;
+}
+
+// ----------------------
+// Registro
+// ----------------------
+.register-wrapper {
+  @extend .login-wrapper; // Misma estructura
+}
+
+.register-card {
+  @extend .login-card; // Misma tarjeta
+}
+
+.register-title {
+  @extend .login-title; // Mismo estilo de título
+}
+
+.auth-register {
+  background-color: $background-color;
+  color: $text-color;
+  border-radius: $border-radius;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+
+  .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid $input-border;
+    font-weight: bold;
+    color: $text-color;
+  }
+
+  label {
+    color: $text-color;
+  }
+
+  input {
+    background-color: $input-bg;
+    color: $text-color;
+    border: 1px solid $input-border;
+    border-radius: $border-radius;
+  }
+
+  .btn-primary {
+    background-color: $primary-color;
+    color: $background-color;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: $border-radius;
+  }
+}
+
+
+.login-image {
+  position: fixed;
+  bottom: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  img {
+    max-width: 250px;
+    height: auto;
+  }
+}
+
+// ----------------------
+// Módulo Empleado
+// ----------------------
+.empleado-index {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 20px;
+}
+
+// ----------------------
+// Módulo Inventario
+// ----------------------
+.inventario-index {
+  background-color: #eaeaea;
+  border: 1px solid #ccc;
+}

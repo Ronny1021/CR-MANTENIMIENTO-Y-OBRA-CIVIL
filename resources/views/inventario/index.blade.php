@@ -64,6 +64,8 @@
                                 <input type="submit" class="btn btn-sm btn-outline-danger"
                                        onclick="return confirm('¿Quieres borrar esta herramienta?')" value="Eliminar">
                             </form>
+
+                            
                         </td>
                     </tr>
                 @endforeach
@@ -81,8 +83,11 @@
             </tr>
         </tfoot>
     </table>
-
+  
     {{-- Paginación con filtros persistentes --}}
     {!! $inventario->appends(['disponibilidad' => request('disponibilidad')])->links() !!}
 </div>
+
+<div class="login-image">
+                                <img src="{{ asset('images/imagefooter (2).png') }}" alt="Imagen decorativa">
 @endsection
