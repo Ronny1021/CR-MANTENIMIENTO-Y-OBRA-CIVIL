@@ -7,7 +7,7 @@
     @if(Session::has('mensaje'))
         <div class="alert alert-success" role="alert">
             {{ Session::get('mensaje') }}
-        </div>
+        </div> 
     @endif
 
     {{-- Filtro por disponibilidad --}}
