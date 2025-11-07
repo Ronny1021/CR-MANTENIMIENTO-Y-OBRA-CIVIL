@@ -17,7 +17,7 @@ Route::get('/', function () {
 // Ruta principal después de iniciar sesión
 Route::get('/home', [EmpleadoController::class, 'index'])->name('home')->middleware('auth');
 
-// 🔓 Ruta pública para recuperación de contraseña
+//  Ruta pública para recuperación de contraseña
 Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 // Grupo de rutas protegidas por autenticación
@@ -37,4 +37,11 @@ Route::middleware(['auth'])->group(function () {
     // Inventario
     Route::get('inventario/pdf', [InventarioController::class, 'exportarPDF'])->name('inventario.pdf');
     Route::resource('inventario', InventarioController::class);
+
+    //Desprendibles
+   Route::get('/desprendible', [NominaController::class, 'desprendibleForm'])->name('desprendible.form');
+    Route::post('/certificados/pdf', [NominaController::class, 'generardesprendible.pdf'])->name('desprendible.pdf');
+   
+
+
 });

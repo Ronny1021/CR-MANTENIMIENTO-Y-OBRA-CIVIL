@@ -135,4 +135,34 @@ class NominaController extends Controller
         $pdf = Pdf::loadView('nomina.certificado_pdf', $data);
         return $pdf->stream('certificado_laboral.pdf');
     }
+
+
+
+public function desprendibleForm()
+    {
+        $empleados = Empleado::orderBy('Nombres')->get();
+        return view('nomina.desprendible_form', compact('empleados'));
+    }
+
+    public function generardesprendible(Request $request)
+    {
+        $request->validate([
+            'empleado_id' => 'required|exists:empleados,id',
+        ]);
+
+        $empleado = Empleado::findOrFail($request->empleado_id);
+        $totalHoras = Nomina::where('empleado_id', $empleado->id)->sum('horas_trabajadas');
+        $fechaActual = now()->translatedFormat('d \d\e F \d\e Y');
+
+        $data = [
+            'empleado' => $empleado,
+            'totalHoras' => $totalHoras,
+            'fechaActual' => $fechaActual,
+            'empresa' => 'CR MANTENIMIENTO Y OBRACIVIL',
+        ];
+
+        $pdf = Pdf::loadView('nomina.desprendible_pdf', $data);
+        return $pdf->stream('certificado_laboral.pdf');
+    }
+
 }

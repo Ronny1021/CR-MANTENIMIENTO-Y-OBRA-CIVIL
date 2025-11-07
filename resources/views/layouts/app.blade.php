@@ -38,10 +38,12 @@
                     @auth
                         @if (!in_array($currentRoute, $authViews))
                             <ul class="navbar-nav me-auto">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('empleado.index') }}">Empleados</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('empleado.index') }}">Empleado</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url('/inventario') }}">Inventario</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('nomina.index') }}">Asistencia</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('certificados.form') }}">Certificados</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('desprendible.form') }}">Desprendible</a></li>
+
                             </ul>
                         @endif
                     @endauth
