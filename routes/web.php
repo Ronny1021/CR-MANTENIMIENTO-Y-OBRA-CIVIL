@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\NominaController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // Rutas de autenticación
 Auth::routes();
@@ -15,6 +16,9 @@ Route::get('/', function () {
 
 // Ruta principal después de iniciar sesión
 Route::get('/home', [EmpleadoController::class, 'index'])->name('home')->middleware('auth');
+
+// 🔓 Ruta pública para recuperación de contraseña
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 // Grupo de rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {

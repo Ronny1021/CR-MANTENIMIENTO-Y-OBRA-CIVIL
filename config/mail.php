@@ -115,4 +115,19 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    
+
+        'mailer_config' => [
+        'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+        'username' => env('MAIL_USERNAME'),
+        'password' => env('MAIL_PASSWORD'),
+        'port' => env('MAIL_PORT', 587),
+        'from_address' => env('MAIL_FROM_ADDRESS'),
+        'from_name' => env('MAIL_FROM_NAME'),
+        'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+        'charset' => 'UTF-8',
+        'smtp_auth' => true,
+        'smtp_options' => [],
+    ],
+
 ];
