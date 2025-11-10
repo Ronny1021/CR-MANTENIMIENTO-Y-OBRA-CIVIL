@@ -8,9 +8,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ContactoController;
 
-
-////////////////////////////////////////
-
 // Rutas de autenticación
 Auth::routes();
 
@@ -19,13 +16,10 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-
-/////////////////////////////////
-
 // Ruta principal después de iniciar sesión
 Route::get('/home', [EmpleadoController::class, 'index'])->name('home')->middleware('auth');
 
-//  Ruta pública para recuperación de contraseña
+// Ruta pública para recuperación de contraseña
 Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 Route::get('/acerca', function () {
@@ -37,8 +31,6 @@ Route::get('/acerca', function () {
 
 Route::post('/contacto/enviar', [ContactoController::class, 'enviar'])->name('contacto.enviar');
 
-
-
 /////////////////////////////
 
 // Grupo de rutas protegidas por autenticación
@@ -47,19 +39,20 @@ Route::middleware(['auth'])->group(function () {
     // Certificados laborales
     Route::get('/certificados', [NominaController::class, 'certificadoForm'])->name('certificados.form');
     Route::post('/certificados/pdf', [NominaController::class, 'generarCertificadoPDF'])->name('certificados.pdf');
-
-    // Nomina
     Route::resource('nomina', NominaController::class);
 
+    // Nomina (Recurso para asistencia/detalles de nómina, si aplica)
+    Route::get('/nomina/create', [NominaController::class, 'create'])->name('nomina.create');
+    Route::post('/nomina', [NominaController::class, 'store'])->name('nomina.store');
     // Empleado
-    Route::get('empleado/create', [EmpleadoController::class, 'create']);
     Route::resource('empleado', EmpleadoController::class);
 
     // Inventario
     Route::get('inventario/pdf', [InventarioController::class, 'exportarPDF'])->name('inventario.pdf');
     Route::resource('inventario', InventarioController::class);
 
-    //Desprendibles
+    // Desprendibles de Nómina
     Route::get('/desprendible', [NominaController::class, 'desprendibleForm'])->name('desprendible.form');
-    Route::post('/certificados/pdf', [NominaController::class, 'generardesprendible.pdf'])->name('desprendible.pdf');
+    // RUTA CORREGIDA: Apunta a un endpoint diferente y al método correcto.
+    Route::post('/desprendible/pdf', [NominaController::class, 'generarDesprendiblePDF'])->name('desprendible.pdf');
 });

@@ -17,214 +17,409 @@
 // Estilos globales
 // ----------------------
 body {
-  font-family: $font-stack;
-  background: linear-gradient(to right, #2f2f2f, #ffffff); // Degradado animado
-  background-size: 200% 200%;
-  animation: gradientShift 20s ease infinite;
-  color: $text-color;
+    font-family: $font-stack;
+    background: linear-gradient(to right, #2f2f2f, #ffffff); // Degradado animado
+    background-size: 200% 200%;
+    color: $text-color;
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .auth-body {
-  @extend body; // Hereda fondo animado
-  animation-duration: 8s; // Más rápido
+    @extend body; // Hereda fondo animado
+    animation-duration: 8s; // Más rápido
 }
 
 .default-body {
-  background-color: #f8f9fa;
-  font-family: $font-stack;
-  color: #212529;
+    background-color: #f8f9fa;
+    font-family: $font-stack;
+    color: #212529;
 }
+
+// ------------------------------------
+// *** PASO 3: Estilos del Botón Flotante de WhatsApp ***
+// ------------------------------------
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px; /* Separación de abajo */
+    right: 30px; /* Separación de la derecha */
+    background-color: #25D366; /* Verde WhatsApp */
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+    z-index: 1000; /* Alto z-index para estar sobre todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* El ícono de Font Awesome */
+.whatsapp-float .whatsapp-icon {
+    font-size: 32px; /* Un poco más grande para que se vea bien */
+}
+
+/* Efecto al pasar el cursor (Hover) */
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.05); /* Ligeramente más grande al interactuar */
+}
+
+/* Adaptación para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    .whatsapp-float .whatsapp-icon {
+        font-size: 28px;
+    }
+}
+// ------------------------------------
+// FIN Estilos de WhatsApp
+// ------------------------------------
+
 
 // ----------------------
 // Encabezado transparente
 // ----------------------
 .transparent-header {
-  background-color: transparent !important;
-  box-shadow: none;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  z-index: 100;
+    background-color: transparent !important;
+    box-shadow: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 100;
 
-  .navbar-brand,
-  .nav-link {
-    color: #ffffff !important;
-    font-weight: bold;
-  }
+    .navbar-brand,
+    .nav-link {
+        color: #ffffff !important;
+        font-weight: bold;
+    }
 
-  .nav-link:hover {
-    color: #cccccc !important;
-  }
+    .nav-link:hover {
+        color: #cccccc !important;
+    }
 }
 
 // ----------------------
 // Login
 // ----------------------
 .login-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 100px 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 100px 20px 0;
 }
 
 .login-card {
-  width: 100%;
-  max-width: 400px;
-  background-color: white;
-  padding: 30px;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow-md;
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    padding: 30px;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-md;
 }
 
 .login-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: $primary-color;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: $primary-color;
 }
 
 // ----------------------
 // Registro
 // ----------------------
 .register-wrapper {
-  @extend .login-wrapper;
+    @extend .login-wrapper;
 }
 
 .register-card {
-  @extend .login-card;
+    @extend .login-card;
 }
 
 .register-title {
-  @extend .login-title;
+    @extend .login-title;
 }
 
 .auth-register {
-  background-color: $background-color;
-  color: $text-color;
-  border-radius: $border-radius;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  padding: 20px;
-
-  .card-header {
-    background-color: transparent;
-    border-bottom: 1px solid $input-border;
-    font-weight: bold;
+    background-color: $background-color;
     color: $text-color;
-  }
-
-  label {
-    color: $text-color;
-  }
-
-  input {
-    background-color: $input-bg;
-    color: $text-color;
-    border: 1px solid $input-border;
     border-radius: $border-radius;
-  }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
 
-  .btn-primary {
-    background-color: $primary-color;
-    color: $background-color;
-    border: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: $border-radius;
-  }
+    .card-header {
+        background-color: transparent;
+        border-bottom: 1px solid $input-border;
+        font-weight: bold;
+        color: $text-color;
+    }
+
+    label {
+        color: $text-color;
+    }
+
+    input {
+        background-color: $input-bg;
+        color: $text-color;
+        border: 1px solid $input-border;
+        border-radius: $border-radius;
+    }
+
+    .btn-primary {
+        background-color: $primary-color;
+        color: $background-color;
+        border: none;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: $border-radius;
+    }
 }
 
 .login-image {
-  position: fixed;
-  bottom: -70px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+    position: fixed;
+    bottom: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
 
-  img {
-    max-width: 250px;
-    height: auto;
-  }
+    img {
+        max-width: 250px;
+        height: auto;
+    }
 }
 
 // ----------------------
 // Módulo Empleado
 // ----------------------
 .empleado-index {
-  background-color: #f5f5f5;
-  color: #333;
-  padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 20px;
 }
 
 // ----------------------
 // Módulo Inventario
 // ----------------------
 .inventario-index {
-  background-color: #eaeaea;
-  border: 1px solid #ccc;
+    background-color: #eaeaea;
+    border: 1px solid #ccc;
 }
 
 // ----------------------
 // Página Acerca de
 // ----------------------
 .hero {
-  background: linear-gradient(to right, #f8f9fa, #e9ecef);
-  padding: 60px 20px;
-  text-align: center;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    padding: 60px 20px;
+    text-align: center;
 
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
 
-  img {
-    max-width: 600px;
-    margin-top: 20px;
-  }
+    img {
+        max-width: 600px;
+        margin-top: 20px;
+    }
 }
 
 .section {
-  padding: 60px 20px;
+    padding: 60px 20px;
 
-  &:nth-child(even) {
-    background-color: #f8f9fa;
-  }
+    &:nth-child(even) {
+        background-color: #f8f9fa;
+    }
 
-  h2 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 }
 
 .testimonial {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Estilo del botón de WhatsApp que ya estaba dentro de la sección de contacto */
 .whatsapp-btn {
-  background-color: #25D366;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  margin-top: 20px;
+    background-color: #25D366;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
 }
 
 .form-section {
-  input,
-  textarea {
-    margin-bottom: 15px;
-  }
+    input,
+    textarea {
+        margin-bottom: 15px;
+    }
+}
+
+/*
+ * Estilos para el Comprobante de Nómina (Simulación Siigo)
+ * Usado en desprendible_nomina_pdf.blade.php
+ */
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+.payroll-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border: 1px solid #ccc; /* Borde sutil alrededor del documento */
+    padding: 20px;
+    box-sizing: border-box;
+}
+.header {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+}
+.data-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+.company-info, .employee-info {
+    width: 48%;
+}
+.company-info {
+    font-size: 9pt;
+}
+.employee-info {
+    text-align: right;
+    font-size: 10pt;
+}
+.employee-info strong {
+    display: inline-block;
+    width: 150px; /* Ancho fijo para alinear etiquetas */
+    font-weight: normal;
+    text-align: left;
+}
+.employee-info span {
+    font-weight: bold;
+}
+
+.logo {
+    width: 100px; /* Ajusta el tamaño del logo */
+    height: auto;
+    margin-bottom: 5px;
+}
+
+.section-title {
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.section-title.ingresos {
+    background-color: #e6f7ff; /* Azul claro */
+}
+.section-title.deducciones {
+    background-color: #fff2e6; /* Naranja claro */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    text-align: right;
+    box-sizing: border-box;
+    font-size: 9pt;
+}
+.data-table th {
+    text-align: center;
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+.data-table .concept {
+    text-align: left;
+    width: 50%;
+}
+
+/* Fila de Totales */
+.total-row td {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.footer-totals {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end; /* Alinear el cuadro de neto a pagar a la derecha */
+}
+
+.neto-a-pagar {
+    width: 50%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+.neto-a-pagar th, .neto-a-pagar td {
+    padding: 10px 15px;
+    font-size: 12pt;
+    border: none;
+}
+.neto-a-pagar th {
+    text-align: left;
+    font-weight: bold;
+    background-color: #e0e0e0; /* Fondo gris para la etiqueta */
+    color: #333;
+}
+.neto-a-pagar td {
+    text-align: right;
+    font-weight: bold;
+    background-color: #ccc; /* Fondo diferente para el valor */
+    color: #000;
+}
+.neto-a-pagar .neto-value {
+    color: #006600; /* Color verde para el valor final */
+}
+
+.disclaimer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 8pt;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
 }

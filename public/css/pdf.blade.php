@@ -1,0 +1,93 @@
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+.payroll-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.header {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+    border-bottom: 2px solid #444;
+    padding-bottom: 5px;
+}
+
+/* Empresa y empleado */
+.data-header-table {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+.data-header-table td {
+    vertical-align: top;
+    padding-bottom: 10px;
+}
+.company-info {
+    width: 50%;
+    font-size: 9pt;
+}
+.employee-info {
+    width: 50%;
+    text-align: right;
+    font-size: 10pt;
+}
+.employee-info .label {
+    display: inline-block;
+    width: 150px;
+    font-weight: normal;
+    text-align: left;
+}
+.employee-info .value {
+    font-weight: bold;
+}
+
+/* Secciones */
+.section-title {
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.section-title.ingresos {
+    background-color: #e6f7ff;
+}
+.section-title.deducciones {
+    background-color: #fff2e6;
+}
+
+/* Tablas */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.data-table th,
+.data-table td {
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    text-align: right;
+    font-size: 9pt;
+}
+.data-table th {
+    text-align: center;
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+.data-table .concept {
+    text-align: left;
+    width: 50%;
+}
+.to

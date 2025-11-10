@@ -10,6 +10,10 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo_icon.ico') }}">
+
+    <!-- CDN de Font Awesome se queda aquí, ya que la vista 'acerca' lo necesita -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -90,5 +94,6 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 </html>

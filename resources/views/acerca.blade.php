@@ -48,10 +48,17 @@
         </form>
 
         <div class="text-center mt-4">
-            <a href="https://wa.me/573001234567?text=Hola%20CR%20Mantenimiento,%20quisiera%20una%20cotización" target="_blank" class="whatsapp-btn">
+            <a href="https://wa.me/573001234567?text=Hola%20CR%20Mantenimiento,%20quisiera%20una%20cotización" target="_blank">
                 Cotizar por WhatsApp
             </a>
         </div>
     </div>
 </section>
+
+<!-- *** CÓDIGO HTML DEL BOTÓN FLOTANTE: Aparece solo aquí *** -->
+<a href="https://wa.me/573001234567?text=Hola%20CR%20Mantenimiento,%20quisiera%20una%20cotización" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp whatsapp-icon"></i>
+</a>
+<!-- NOTA: Asegúrate de reemplazar 573001234567 con tu número real sin el '+' -->
+
 @endsection
