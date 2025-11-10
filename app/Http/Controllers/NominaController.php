@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Nomina;
 use App\Models\Empleado;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class NominaController extends Controller
@@ -25,7 +26,7 @@ class NominaController extends Controller
     public function create()
     {
         // Se asume que el campo es 'Nombres' en tu modelo Empleado.
-        $empleados = Empleado::orderBy('Nombres')->get(); 
+        $empleados = Empleado::orderBy('Nombres')->get();
         return view('nomina.create', compact('empleados'));
     }
 
@@ -191,43 +192,47 @@ class NominaController extends Controller
         ], $mensajes);
 
         $empleado = Empleado::findOrFail($request->empleado_id);
+        $usuario = Auth::user();
+
         $fechaInicio = $request->fecha_inicio;
         $fechaFin = $request->fecha_fin;
 
-        // EJEMPLO: Obtener los registros de nómina (horas trabajadas) dentro del período
         $registrosNomina = Nomina::where('empleado_id', $empleado->id)
-                            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
-                            ->get();
-        
-        // Aquí debes calcular los devengos y deducciones reales
-        // Usamos una simulación, pero deberías basarte en $registrosNomina para los cálculos.
+            ->whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->get();
 
-        $data = [
-            'empleado' => $empleado,
-            'periodo' => Carbon::parse($fechaInicio)->translatedFormat('d F Y') . ' - ' . Carbon::parse($fechaFin)->translatedFormat('d F Y'),
-            'empresa' => 'CR MANTENIMIENTO Y OBRACIVIL',
-            
-            // Datos de nómina simulados o calculados (¡ADAPTAR ESTO A TUS CÁLCULOS REALES!)
-            'comprobante_numero' => 'N-'.substr(md5(uniqid()), 0, 6),
-            'salario_basico' => $empleado->salario_basico ?? 1500000, 
-            'cargo' => $empleado->cargo ?? 'Técnico',
+        $desprendible = [
+            'empresa' => [
+                'nombre' => 'CR MANTENIMIENTO Y OBRACIVIL',
+                'nit' => '256.820.100-2',
+                'direccion' => 'Carrera 1 # 1-1, Cali/Valle Del Cauca',
+            ],
+            'empleado' => [
+                'nombres' => $empleado->Nombres,
+                'cedula' => $empleado->Cedula,
+                'cargo' => $empleado->Cargo,
+                'salario_base' => $empleado->salario_basico,
+                'banco' => $empleado->Banco,
+                'cuenta' => $empleado->Cuenta,
+            ],
+            'periodo' => [
+                'inicio' => $fechaInicio,
+                'fin' => $fechaFin,
+            ],
+            'generado_por' => $usuario->name ?? 'Usuario no identificado',
+            'fecha_generacion' => Carbon::now()->format('d/m/Y H:i'),
 
             'devengos' => [
-                ['concepto' => 'Salario Básico (Periodo)', 'cantidad' => 15, 'valor' => 750000],
-                ['concepto' => 'Horas Extra Nocturnas', 'cantidad' => 5, 'valor' => 125000],
+                ['concepto' => 'Salario Básico (Periodo)', 'valor' => 750000],
+                ['concepto' => 'Horas Extra Nocturnas', 'valor' => 125000],
             ],
             'deducciones' => [
-                ['concepto' => 'Salud', 'cantidad' => 0, 'valor' => 30000],
-                ['concepto' => 'Pensión', 'cantidad' => 0, 'valor' => 30000],
+                ['concepto' => 'Salud', 'valor' => 30000],
+                ['concepto' => 'Pensión', 'valor' => 30000],
             ],
-            // Cálculos
-            'total_ingresos' => 875000, 
-            'total_deducciones' => 60000, 
-            'neto_a_pagar' => 815000, 
         ];
 
-        // Se usa la librería DomPDF
-        $pdf = Pdf::loadView('nomina.desprendible_pdf', $data);
-        return $pdf->stream('desprendible_nomina_'.$empleado->id.'_'.Carbon::now()->format('Ymd').'.pdf');
+        $pdf = Pdf::loadView('nomina.desprendible_pdf', compact('desprendible'));
+        return $pdf->stream('desprendible_nomina_' . $empleado->id . '_' . Carbon::now()->format('Ymd') . '.pdf');
     }
 }

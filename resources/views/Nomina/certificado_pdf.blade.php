@@ -1,8 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Certificado Laboral de cr</title>
+    <title>{{ config('app.', 'Certificado Laboral de cr') }}</title>
+   
     <style>
         body { font-family: DejaVu Sans, sans-serif; font-size: 14px; line-height: 1.6; }
         .titulo { text-align: center; font-weight: bold; font-size: 18px; margin-bottom: 20px; }

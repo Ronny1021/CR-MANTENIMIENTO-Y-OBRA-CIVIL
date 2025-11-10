@@ -4,7 +4,7 @@
 <section class="hero">
     <h2>Nuestra Historia</h2>
     <p>CR Mantenimiento & Obra Civil nació con el propósito de ofrecer soluciones integrales en mantenimiento y construcción. A lo largo de los años, hemos trabajado con pasión, compromiso y excelencia.</p>
-    <img src="{{ asset('images/historia.jpg') }}" alt="Historia de la empresa" class="img-fluid">
+    <img src="{{ asset('images/CRTRABAJADORES.png') }}" alt="Historia de la empresa" class="img-fluid">
 </section>
 
 <section class="section">
@@ -49,7 +49,7 @@
 
         <div class="text-center mt-4">
             <a href="https://wa.me/573001234567?text=Hola%20CR%20Mantenimiento,%20quisiera%20una%20cotización" target="_blank">
-                Cotizar por WhatsApp
+                
             </a>
         </div>
     </div>
