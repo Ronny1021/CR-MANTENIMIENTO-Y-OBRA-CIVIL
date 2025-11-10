@@ -28,27 +28,32 @@
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Menú izquierdo: solo si está autenticado y no en login/register -->
-                    @auth
-                        @if (!in_array($currentRoute, $authViews))
-                            <ul class="navbar-nav me-auto">
+                    <!-- Menú izquierdo -->
+                    <ul class="navbar-nav me-auto">
+                        @auth
+                            @if (!in_array($currentRoute, $authViews))
                                 <li class="nav-item"><a class="nav-link" href="{{ route('empleado.index') }}">Empleado</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url('/inventario') }}">Inventario</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('nomina.index') }}">Asistencia</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('certificados.form') }}">Certificados</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('desprendible.form') }}">Desprendible</a></li>
+                            @endif
+                        @endauth
+                        <!-- Enlace visible para todos -->
 
-                            </ul>
-                        @endif
-                    @endauth
+                        @guest
+                        <li class="nav-item"><a class="nav-link" href="{{ route('acerca') }}">ACERCA DE</a></li>
+                        @endguest
 
-                    <!-- Menú derecho: siempre visible -->
+                    </ul>
+
+                    <!-- Menú derecho -->
                     <ul class="navbar-nav ms-auto">
                         @guest
                             @if (Route::has('login'))
@@ -60,13 +65,13 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         Cerrar Sesión
                                     </a>
 

@@ -95,15 +95,15 @@ body {
 // Registro
 // ----------------------
 .register-wrapper {
-  @extend .login-wrapper; // Misma estructura
+  @extend .login-wrapper;
 }
 
 .register-card {
-  @extend .login-card; // Misma tarjeta
+  @extend .login-card;
 }
 
 .register-title {
-  @extend .login-title; // Mismo estilo de título
+  @extend .login-title;
 }
 
 .auth-register {
@@ -141,7 +141,6 @@ body {
   }
 }
 
-
 .login-image {
   position: fixed;
   bottom: -70px;
@@ -170,4 +169,62 @@ body {
 .inventario-index {
   background-color: #eaeaea;
   border: 1px solid #ccc;
+}
+
+// ----------------------
+// Página Acerca de
+// ----------------------
+.hero {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  padding: 60px 20px;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  img {
+    max-width: 600px;
+    margin-top: 20px;
+  }
+}
+
+.section {
+  padding: 60px 20px;
+
+  &:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+
+.testimonial {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.whatsapp-btn {
+  background-color: #25D366;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.form-section {
+  input,
+  textarea {
+    margin-bottom: 15px;
+  }
 }
